@@ -1,0 +1,41 @@
+<div class="mist-spell-hub-body">
+	<div class="mist-spell-hub-top">
+		<p class="hint">{{localize "MIST_SPELL.Hub.Hint"}}</p>
+		<button type="button" data-action="openLibrary"><i class="fa-solid fa-book-journal-whills" inert></i> {{localize "MIST_SPELL.Library.Button"}}</button>
+	</div>
+	{{#if characters.length}}
+		<table>
+			<thead>
+				<tr>
+					<th></th>
+					<th data-tooltip="{{localize "MIST_SPELL.Enabled"}}"><i class="fa-solid fa-wand-sparkles" inert></i></th>
+					<th>{{localize "MIST_SPELL.Hub.Active"}}</th>
+					<th>{{localize "MIST_SPELL.Hub.Learnt"}}</th>
+					<th>{{localize "MIST_SPELL.Hub.Books"}}</th>
+					<th>{{localize "MIST_SPELL.Hub.Materials"}}</th>
+					<th>{{localize "MIST_SPELL.Hub.Paper"}}</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				{{#each characters as |character|}}
+					<tr data-actor-id="{{character.id}}" class="{{#unless character.enabled}}off{{/unless}}">
+						<th><img src="{{character.img}}" alt=""> {{character.name}}</th>
+						<td><input type="checkbox" data-enable="{{character.id}}" {{#if character.enabled}}checked{{/if}} data-tooltip="{{localize "MIST_SPELL.Enabled"}}"></td>
+						<td>{{character.active}}</td>
+						<td>{{character.learnt}}</td>
+						<td>{{character.books}}</td>
+						<td>{{character.materials}}</td>
+						<td>{{character.paper}}</td>
+						<td class="buttons">
+							<a data-action="openLearn" data-tooltip="{{localize "MIST_SPELL.Hub.OpenLearn"}}"><i class="fa-solid fa-wand-sparkles" inert></i></a>
+							<a data-action="openSheet" data-tooltip="{{localize "MIST_SPELL.Hub.OpenSheet"}}"><i class="fa-solid fa-id-card" inert></i></a>
+						</td>
+					</tr>
+				{{/each}}
+			</tbody>
+		</table>
+	{{else}}
+		<p class="hint">{{localize "MIST_SPELL.Hub.NoCharacters"}}</p>
+	{{/if}}
+</div>

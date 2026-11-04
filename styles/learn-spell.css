@@ -1,0 +1,438 @@
+.mist-spell .window-content {
+	padding: 0.5rem;
+	overflow-y: auto;
+}
+
+.mist-spell .hint {
+	font-size: var(--font-size-12);
+	opacity: 0.75;
+}
+
+.mist-spell-tabs {
+	display: flex;
+	gap: 1rem;
+	margin-bottom: 0.4rem;
+	border-bottom: 1px solid var(--color-border, #7a7971);
+}
+
+.mist-spell-tabs a {
+	padding: 0.25rem 0.4rem;
+}
+
+.mist-spell-tabs a.active {
+	font-weight: bold;
+	border-bottom: 2px solid var(--color-warm-2, #ff6400);
+}
+
+.mist-spell-card {
+	margin: 0.5rem 0;
+	padding: 0.5rem;
+	border: 1px solid var(--color-border, #7a7971);
+	border-radius: 8px;
+}
+
+.mist-spell-card.completed {
+	border-color: var(--color-level-success, #2c7a2c);
+}
+
+.mist-spell-card.editing {
+	border-style: dashed;
+}
+
+.mist-spell-card header {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+}
+
+.mist-spell-card header .icon,
+.mist-spell-card header .icon img {
+	width: 44px;
+	height: 44px;
+	flex: none;
+	border: none;
+	object-fit: contain;
+}
+
+.mist-spell-card header h3 {
+	flex: 1;
+	margin: 0;
+	border: none;
+}
+
+.mist-spell-card header input.name {
+	flex: 1;
+	font-weight: bold;
+}
+
+.mist-spell-card header > a:not(.icon) {
+	flex: none;
+	padding: 0 0.2rem;
+}
+
+.mist-spell-card textarea {
+	width: 100%;
+	margin-top: 0.4rem;
+	resize: vertical;
+}
+
+.mist-spell-card .description {
+	white-space: pre-wrap;
+	margin: 0.4rem 0 0.2rem;
+}
+
+.mist-spell-card .settings {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.6rem;
+	margin-top: 0.4rem;
+	align-items: center;
+}
+
+.mist-spell-card .settings label {
+	display: flex;
+	align-items: center;
+	gap: 0.3rem;
+}
+
+.mist-spell-card .settings input[type="number"] {
+	width: 3.5rem;
+}
+
+.mist-spell-progress {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	margin: 0.4rem 0;
+}
+
+.mist-spell-progress .bar {
+	flex: 1;
+	height: 10px;
+	border-radius: 5px;
+	background: rgba(127, 127, 127, 0.25);
+	overflow: hidden;
+}
+
+.mist-spell-progress .bar span {
+	display: block;
+	height: 100%;
+	background: var(--color-warm-2, #ff6400);
+}
+
+.mist-spell-card.completed .mist-spell-progress .bar span {
+	background: var(--color-level-success, #2c7a2c);
+}
+
+.mist-spell-actions {
+	display: flex;
+	gap: 0.5rem;
+	margin-top: 0.4rem;
+}
+
+.mist-spell-actions .done {
+	flex: 1;
+	align-self: center;
+	font-weight: bold;
+	color: var(--color-level-success, #2c7a2c);
+}
+
+.mist-spell-add {
+	width: 100%;
+	margin-top: 0.5rem;
+}
+
+/* Chat card */
+
+.mist-spell-chat header {
+	display: flex;
+	gap: 0.5rem;
+	align-items: center;
+}
+
+.mist-spell-chat header img {
+	width: 40px;
+	height: 40px;
+	border: none;
+}
+
+.mist-spell-chat h3 {
+	margin: 0;
+}
+
+.mist-spell-chat .mist-spell-outcome {
+	font-weight: bold;
+	margin: 0.4rem 0 0.2rem;
+}
+
+.mist-spell-chat.critical .mist-spell-outcome {
+	color: #b38600;
+}
+
+.mist-spell-chat.successHope .mist-spell-outcome,
+.mist-spell-chat.successFear .mist-spell-outcome {
+	color: #2c7a2c;
+}
+
+.mist-spell-chat.failureHope .mist-spell-outcome,
+.mist-spell-chat.failureFear .mist-spell-outcome {
+	color: #a33;
+}
+
+/* Learn Spell */
+
+.mist-spell .warning {
+	color: #c33;
+}
+
+.mist-spell-stock {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 1rem;
+	margin: 0.2rem 0 0.4rem;
+}
+
+.mist-spell-card header .title {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+}
+
+.mist-spell-card.book {
+	border-style: dotted;
+}
+
+.mist-spell-cards {
+	list-style: none;
+	margin: 0.3rem 0;
+	padding: 0;
+}
+
+.mist-spell-cards li {
+	display: flex;
+	align-items: center;
+	gap: 0.3rem;
+	padding: 0.1rem 0;
+}
+
+.mist-spell-cards li > a:first-child {
+	flex: 1;
+	display: flex;
+	align-items: center;
+	gap: 0.4rem;
+}
+
+.mist-spell-cards img {
+	width: 24px;
+	height: 24px;
+	border: none;
+	object-fit: contain;
+}
+
+.mist-spell-books-title {
+	margin: 0.8rem 0 0.2rem;
+	border-bottom: 1px solid var(--color-border, #7a7971);
+}
+
+.mist-spell-drop {
+	margin-top: 0.6rem;
+	padding: 0.5rem;
+	text-align: center;
+	border: 1px dashed var(--color-border, #7a7971);
+	border-radius: 8px;
+}
+
+.mist-spell-chat .mist-spell-spent {
+	font-size: var(--font-size-12);
+	opacity: 0.85;
+}
+
+/* Spell library */
+
+.mist-spell-dropzone {
+	margin: 0.4rem 0;
+	padding: 0.6rem;
+	text-align: center;
+	border: 2px dashed var(--color-border, #7a7971);
+	border-radius: 6px;
+	opacity: 0.85;
+}
+
+.mist-spell-dropzone.small {
+	padding: 0.3rem;
+	font-size: var(--font-size-12);
+}
+
+.mist-spell-dropzone.drag-over {
+	border-color: var(--color-warm-2, #ff6400);
+	opacity: 1;
+}
+
+.mist-spell-cards li .entry {
+	flex: 1;
+	display: flex;
+	align-items: center;
+	gap: 0.4rem;
+}
+
+.mist-spell-library-open {
+	width: 100%;
+	margin-top: 0.4rem;
+}
+
+/* Materials put in for an attempt */
+
+.mist-spell-toggle {
+	display: flex;
+	align-items: center;
+	gap: 0.4rem;
+	font-weight: bold;
+}
+
+.mist-spell-materials {
+	margin: 0.5rem 0;
+	padding: 0.5rem;
+	border: 1px solid var(--color-border, #7a7971);
+	border-radius: 8px;
+}
+
+.mist-spell-materials header {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+}
+
+.mist-spell-materials h4 {
+	flex: 1;
+	margin: 0;
+	border: none;
+}
+
+.mist-spell-placed {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.3rem;
+	min-height: 40px;
+	margin: 0.4rem 0;
+	padding: 0.3rem;
+	border: 2px dashed var(--color-border, #7a7971);
+	border-radius: 6px;
+	align-items: center;
+}
+
+.mist-spell-placed .slot {
+	position: relative;
+	display: flex;
+	align-items: center;
+	gap: 0.2rem;
+}
+
+.mist-spell-placed .slot img {
+	width: 32px;
+	height: 32px;
+	border: none;
+}
+
+.mist-spell-extra-row {
+	display: flex;
+	align-items: center;
+	gap: 0.4rem;
+	margin: 0.2rem 0;
+}
+
+.mist-spell-extra-row img {
+	width: 28px;
+	height: 28px;
+	border: none;
+}
+
+.mist-spell-extra-row span:first-of-type {
+	flex: 1;
+}
+
+.mist-spell-extra-row input {
+	width: 4rem;
+}
+
+/* GM panel */
+
+.mist-spell-hub .mist-spell-hub-top {
+	display: flex;
+	align-items: center;
+	gap: 0.6rem;
+}
+
+.mist-spell-hub .mist-spell-hub-top .hint {
+	flex: 1;
+	margin: 0;
+}
+
+.mist-spell-hub .mist-spell-hub-top button {
+	flex: none;
+	width: auto;
+}
+
+.mist-spell-hub table {
+	width: 100%;
+	margin-top: 0.5rem;
+	border-collapse: collapse;
+}
+
+.mist-spell-hub th,
+.mist-spell-hub td {
+	padding: 0.25rem 0.4rem;
+	text-align: center;
+}
+
+.mist-spell-hub tbody th {
+	text-align: left;
+	font-weight: normal;
+	white-space: nowrap;
+}
+
+.mist-spell-hub tbody th img {
+	width: 28px;
+	height: 28px;
+	border: none;
+	vertical-align: middle;
+	margin-right: 0.3rem;
+	object-fit: cover;
+	border-radius: 4px;
+}
+
+.mist-spell-hub tbody tr:nth-child(odd) {
+	background: rgba(127, 127, 127, 0.08);
+}
+
+.mist-spell-hub tr.off th,
+.mist-spell-hub tr.off td:not(:nth-child(2)) {
+	opacity: 0.5;
+}
+
+.mist-spell-hub .buttons a {
+	margin: 0 0.25rem;
+}
+
+/* Outcome table of a study */
+
+.mist-spell-table {
+	width: 100%;
+	margin: 0.4rem 0;
+	border-collapse: collapse;
+	font-size: var(--font-size-13);
+}
+
+.mist-spell-table th,
+.mist-spell-table td {
+	padding: 0.2rem 0.4rem;
+	text-align: left;
+}
+
+.mist-spell-table tbody tr:nth-child(odd) {
+	background: rgba(127, 127, 127, 0.1);
+}
+
+.mist-spell-table input {
+	width: 100%;
+	min-width: 3rem;
+}

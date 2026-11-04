@@ -1,0 +1,48 @@
+<div class="mist-spell-body">
+	<nav class="mist-spell-tabs">
+		{{#each tabs as |tab|}}
+			<a data-action="switchTab" data-tab="{{tab.id}}" class="{{#if tab.active}}active{{/if}}">{{tab.label}}</a>
+		{{/each}}
+	</nav>
+	<p class="hint">{{hint}}</p>
+	<div class="mist-spell-dropzone" data-drop="{{tab}}"><i class="fa-solid fa-hand-pointer" inert></i> {{drop}}</div>
+
+	{{#if (eq tab "books")}}
+		{{#each entries as |book|}}
+			<section class="mist-spell-card book" data-name="{{book.name}}">
+				<header>
+					<img class="icon" src="{{book.img}}" alt="">
+					<div class="title">
+						<h3>{{book.name}}</h3>
+						<span class="hint">{{localize "MIST_SPELL.Library.SpellCount" count=book.cards.length}}</span>
+					</div>
+					<a data-action="removeEntry" data-tooltip="{{localize "MIST_SPELL.Library.Remove"}}"><i class="fa-solid fa-trash" inert></i></a>
+				</header>
+				<ul class="mist-spell-cards editable">
+					{{#each book.cards as |card|}}
+						<li data-uuid="{{card.uuid}}">
+							<a data-action="openCard"><img src="{{card.img}}" alt=""> {{card.name}} <span class="hint">({{localize "MIST_SPELL.Level" level=card.level}})</span></a>
+							<a data-action="removeSpell" data-tooltip="{{localize "MIST_SPELL.Library.RemoveSpell"}}"><i class="fa-solid fa-xmark" inert></i></a>
+						</li>
+					{{/each}}
+				</ul>
+				<div class="mist-spell-dropzone small" data-drop="spells" data-book="{{book.name}}">{{localize "MIST_SPELL.Library.DropSpells"}}</div>
+			</section>
+		{{else}}
+			<p class="hint">{{localize "MIST_SPELL.Library.Empty"}}</p>
+		{{/each}}
+	{{else}}
+		<ul class="mist-spell-cards editable">
+			{{#each entries as |entry|}}
+				<li data-name="{{entry.name}}">
+					<span class="entry"><img src="{{entry.img}}" alt=""> {{entry.name}}</span>
+					{{#if entry.worthText}}<span class="hint">{{localize "MIST_SPELL.Library.Worth" value=entry.worthText}}</span>{{/if}}
+					<a data-action="removeEntry" data-tooltip="{{localize "MIST_SPELL.Library.Remove"}}"><i class="fa-solid fa-xmark" inert></i></a>
+				</li>
+			{{else}}
+				<li class="hint">{{localize "MIST_SPELL.Library.Empty"}}</li>
+			{{/each}}
+		</ul>
+		{{#if (eq tab "paper")}}<p class="hint">{{localize "MIST_SPELL.Library.PaperByName"}}</p>{{/if}}
+	{{/if}}
+</div>

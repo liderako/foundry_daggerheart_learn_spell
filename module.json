@@ -1,0 +1,49 @@
+{
+	"id": "mist-age-learn-spell",
+	"title": "The Mist Age - Learn Spell",
+	"description": "Learning new spells for Daggerheart characters: study a spell book (or a spell the GM gives) as a project; every attempt costs silver in alchemy and magic materials and sheets of paper, the progress moves with Hope and Fear, and the learnt spell is added to the character as a domain card.",
+	"version": "1.0.0",
+	"compatibility": {
+		"minimum": "13",
+		"verified": "14"
+	},
+	"authors": [
+		{
+			"name": "asvirido"
+		}
+	],
+	"relationships": {
+		"systems": [
+			{
+				"id": "daggerheart",
+				"type": "system"
+			}
+		]
+	},
+	"esmodules": [
+		"scripts/main.js"
+	],
+	"styles": [
+		"styles/learn-spell.css"
+	],
+	"languages": [
+		{
+			"lang": "en",
+			"name": "English",
+			"path": "languages/en.json"
+		},
+		{
+			"lang": "ru",
+			"name": "Русский",
+			"path": "languages/ru.json"
+		},
+		{
+			"lang": "uk",
+			"name": "Українська",
+			"path": "languages/uk.json"
+		}
+	],
+	"url": "",
+	"manifest": "",
+	"download": ""
+}

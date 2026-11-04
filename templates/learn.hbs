@@ -1,0 +1,194 @@
+<div class="mist-spell-body">
+	<nav class="mist-spell-tabs">
+		<a data-action="switchTab" data-tab="active" class="{{#if (eq tab "active")}}active{{/if}}"><i class="fa-solid fa-wand-sparkles" inert></i> {{localize "MIST_SPELL.TabActive" count=activeCount}}</a>
+		<a data-action="switchTab" data-tab="learnt" class="{{#if (eq tab "learnt")}}active{{/if}}"><i class="fa-solid fa-circle-check" inert></i> {{localize "MIST_SPELL.TabLearnt" count=learntCount}}</a>
+	</nav>
+
+	{{#if isGM}}
+		<label class="mist-spell-toggle">
+			<input type="checkbox" data-action="toggleEnabled" {{#if enabled}}checked{{/if}}>
+			{{localize "MIST_SPELL.Enabled"}}
+		</label>
+	{{/if}}
+	{{#unless enabled}}<p class="hint warning">{{localize "MIST_SPELL.DisabledHint"}}</p>{{/unless}}
+
+	<p class="mist-spell-stock">
+		<span data-tooltip="{{localize "MIST_SPELL.PaperHint"}}" class="{{#unless paper}}warning{{/unless}}"><i class="fa-solid fa-scroll" inert></i> {{localize "MIST_SPELL.PaperCount" count=paper}}</span>
+		<span><i class="fa-solid fa-dice-d12" inert></i> {{traitLabel}}</span>
+	</p>
+	{{#if (eq tab "active")}}
+		<p class="hint">{{localize "MIST_SPELL.Hint"}}</p>
+
+		<section class="mist-spell-materials">
+			<header>
+				<h4><i class="fa-solid fa-gem" inert></i> {{localize "MIST_SPELL.Materials.Title" value=placedText}}</h4>
+				{{#if placed.length}}<a data-action="clearPlaced" data-tooltip="{{localize "MIST_SPELL.Materials.Clear"}}"><i class="fa-solid fa-rotate-left" inert></i></a>{{/if}}
+			</header>
+			<div class="mist-spell-placed">
+				{{#each placed as |item|}}
+					<a class="slot" data-item-id="{{item.id}}" data-action="unplace" data-tooltip="{{item.name}}<br>{{localize "MIST_SPELL.Materials.ClickToRemove"}}">
+						<img src="{{item.img}}" alt=""><b>×{{item.units}}</b>
+					</a>
+				{{else}}
+					<span class="hint">{{localize "MIST_SPELL.Materials.NonePlaced"}}</span>
+				{{/each}}
+			</div>
+			{{#if materials.length}}
+				<ul class="mist-spell-cards">
+					{{#each materials as |item|}}
+						<li data-item-id="{{item.id}}">
+							<span class="entry"><img src="{{item.img}}" alt=""> {{item.name}}</span>
+							<span class="hint">{{item.worth}} · {{localize "MIST_SPELL.Materials.Have" count=item.left}}</span>
+							{{#if (and ../canRoll item.left)}}<a data-action="place" data-tooltip="{{localize "MIST_SPELL.Materials.AddHint"}}"><i class="fa-solid fa-arrow-up" inert></i></a>{{/if}}
+						</li>
+					{{/each}}
+				</ul>
+			{{else}}
+				<p class="hint">{{localize "MIST_SPELL.Materials.NoneOwned"}}</p>
+			{{/if}}
+		</section>
+	{{/if}}
+
+	{{#each projects as |project|}}
+		<section class="mist-spell-card {{#if project.completed}}completed{{/if}} {{#if project.editing}}editing{{/if}}" data-project-id="{{project.id}}">
+			<header>
+				{{#if (and project.editing project.project)}}
+					<a class="icon" data-action="pickImage" data-tooltip="{{localize "MIST_SPELL.Project.PickImage"}}"><img src="{{project.img}}" alt=""></a>
+				{{else}}
+					<img class="icon" src="{{project.img}}" alt="">
+				{{/if}}
+				<div class="title">
+					{{#if (and project.editing project.project)}}
+						<input type="text" class="name" value="{{project.name}}" data-project-field="name">
+					{{else}}
+						<h3>{{project.name}}</h3>
+					{{/if}}
+					<span class="hint">{{#if project.project}}{{localize "MIST_SPELL.Project.Label"}} · {{/if}}{{localize "MIST_SPELL.LevelTier" level=project.level tier=project.tier}}{{#if project.book}} · {{localize "MIST_SPELL.IsBook"}}{{/if}}</span>
+				</div>
+				{{#if ../isGM}}
+					<a data-action="toggleEdit" data-tooltip="{{#if project.editing}}{{localize "MIST_SPELL.DoneEditing"}}{{else}}{{localize "MIST_SPELL.Edit"}}{{/if}}"><i class="fa-solid {{#if project.editing}}fa-check{{else}}fa-pen-to-square{{/if}}" inert></i></a>
+				{{/if}}
+				{{#if (or ../isGM (and (not project.project) (not project.progress) (not project.completed)))}}
+					<a data-action="remove" data-tooltip="{{localize "MIST_SPELL.Remove"}}"><i class="fa-solid fa-trash" inert></i></a>
+				{{/if}}
+			</header>
+
+			<ul class="mist-spell-cards">
+				{{#each project.cards as |card|}}
+					<li><a data-action="openCard" data-uuid="{{card.uuid}}"><img src="{{card.img}}" alt=""> {{card.name}} <span class="hint">({{localize "MIST_SPELL.Level" level=card.level}})</span></a></li>
+				{{/each}}
+			</ul>
+
+			{{#if project.project}}
+				{{#if project.editing}}
+					<textarea rows="3" data-project-field="description" placeholder="{{localize "MIST_SPELL.Project.Description"}}">{{project.description}}</textarea>
+				{{else if project.description}}
+					<p class="description">{{project.description}}</p>
+				{{/if}}
+			{{/if}}
+			{{#if project.editing}}
+				<div class="settings">
+					<label>{{localize "MIST_SPELL.LevelLabel"}} <input type="number" min="1" value="{{project.level}}" data-project-field="level"></label>
+					<label>{{localize "MIST_SPELL.Progress"}} <input type="number" min="0" max="{{project.needed}}" value="{{project.left}}" data-project-field="left"> / {{project.needed}}</label>
+					<label><input type="checkbox" {{#if project.book}}checked{{/if}} data-project-field="book"> {{localize "MIST_SPELL.IsBook"}}</label>
+				</div>
+			{{/if}}
+
+			<div class="mist-spell-progress">
+				<div class="bar"><span style="width: {{project.percent}}%"></span></div>
+				<b data-tooltip="{{localize "MIST_SPELL.CounterHint"}}">{{project.left}} / {{project.needed}}</b>
+			</div>
+
+			{{#if (and project.editing project.project)}}
+				<div class="settings">
+					<label><input type="checkbox" data-action="toggleTable" {{#if project.hasTable}}checked{{/if}}> {{localize "MIST_SPELL.Table.Own"}}</label>
+					{{#if project.hasTable}}
+						<label>{{localize "MIST_SPELL.Table.Needed"}} <input type="number" min="1" value="{{project.needed}}" data-table-field="needed"></label>
+						<label>{{localize "MIST_SPELL.DifficultyLabel"}} <input type="number" min="1" value="{{project.baseDifficulty}}" data-table-field="difficulty"></label>
+					{{/if}}
+				</div>
+			{{/if}}
+			{{#unless project.completed}}
+				<table class="mist-spell-table">
+					<thead>
+						<tr>
+							<th>{{localize "MIST_SPELL.Table.Outcome"}}</th>
+							<th>{{localize "MIST_SPELL.Table.Progress"}}</th>
+							<th>{{localize "MIST_SPELL.Table.Silver"}}</th>
+							<th>{{localize "MIST_SPELL.Table.Paper"}}</th>
+						</tr>
+					</thead>
+					<tbody>
+						{{#each project.rows as |row|}}
+							<tr>
+								<td>{{row.label}}</td>
+								{{#if (and project.editing project.hasTable)}}
+									<td><input type="number" step="1" value="{{row.gain}}" data-table-field="outcomes.{{row.outcome}}.gain"></td>
+									<td><input type="number" min="0" step="0.5" value="{{row.silver}}" data-table-field="outcomes.{{row.outcome}}.silver"></td>
+									<td><input type="text" value="{{row.paper}}" data-table-field="outcomes.{{row.outcome}}.paper"></td>
+								{{else}}
+									<td><b>{{row.gainText}}</b></td>
+									<td>{{row.silver}}</td>
+									<td>{{row.paper}}</td>
+								{{/if}}
+							</tr>
+						{{/each}}
+					</tbody>
+				</table>
+			{{/unless}}
+
+			{{#unless project.completed}}
+				<p class="hint">
+					{{localize "MIST_SPELL.Check" difficulty=project.difficulty cost=project.costText}}
+					{{#unless project.paper}}<br><span class="warning">{{localize "MIST_SPELL.NoPaperWarning"}}</span>{{/unless}}
+					{{#unless project.enoughMaterials}}<br><span class="warning">{{localize "MIST_SPELL.NotEnoughMaterials" value=project.materialsText cost=project.costText}}</span>{{/unless}}
+					{{#if project.missingBook}}<br><span class="warning">{{localize "MIST_SPELL.MissingBook"}}</span>{{/if}}
+				</p>
+			{{/unless}}
+
+			<footer class="mist-spell-actions">
+				{{#if project.completed}}
+					<span class="done"><i class="fa-solid fa-circle-check" inert></i> {{localize "MIST_SPELL.Done"}}</span>
+					{{#if ../isGM}}<button type="button" data-action="reopen"><i class="fa-solid fa-rotate-left" inert></i> {{localize "MIST_SPELL.Reopen"}}</button>{{/if}}
+				{{else if ../canRoll}}
+					<button type="button" class="primary" data-action="roll" {{#unless project.ready}}disabled{{/unless}}><i class="fa-solid fa-dice-d12" inert></i> {{localize "MIST_SPELL.Roll" trait=../traitLabel difficulty=project.difficulty}}</button>
+				{{/if}}
+			</footer>
+		</section>
+	{{else}}
+		{{#unless books.length}}
+			<p class="hint">{{#if (eq tab "learnt")}}{{localize "MIST_SPELL.NoneLearnt"}}{{else}}{{localize "MIST_SPELL.None"}}{{/if}}</p>
+		{{/unless}}
+	{{/each}}
+
+	{{#if books.length}}
+		<h4 class="mist-spell-books-title">{{localize "MIST_SPELL.Books"}}</h4>
+		{{#each books as |book|}}
+			<section class="mist-spell-card book" data-book-id="{{book.id}}">
+				<header>
+					<img class="icon" src="{{book.img}}" alt="">
+					<div class="title">
+						<h3>{{book.name}}</h3>
+						{{#if book.book}}<span class="hint">{{localize "MIST_SPELL.IsBook"}}</span>{{/if}}
+					</div>
+				</header>
+				<ul class="mist-spell-cards">
+					{{#each book.cards as |card|}}
+						<li><a data-action="openCard" data-uuid="{{card.uuid}}"><img src="{{card.img}}" alt=""> {{card.name}} <span class="hint">({{localize "MIST_SPELL.Level" level=card.level}})</span></a></li>
+					{{/each}}
+				</ul>
+				{{#if ../canRoll}}
+					<footer class="mist-spell-actions">
+						<button type="button" data-action="start"><i class="fa-solid fa-book-open" inert></i> {{localize "MIST_SPELL.Start"}}</button>
+					</footer>
+				{{/if}}
+			</section>
+		{{/each}}
+	{{/if}}
+
+	{{#if (and isGM (eq tab "active"))}}
+		<button type="button" class="mist-spell-library-open" data-action="addProject"><i class="fa-solid fa-plus" inert></i> {{localize "MIST_SPELL.Project.Add"}}</button>
+		<p class="mist-spell-drop hint"><i class="fa-solid fa-hand-pointer" inert></i> {{localize "MIST_SPELL.DropHint"}}</p>
+		<button type="button" class="mist-spell-library-open" data-action="openLibrary"><i class="fa-solid fa-book-journal-whills" inert></i> {{localize "MIST_SPELL.Library.Button"}}</button>
+	{{/if}}
+</div>
