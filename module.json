@@ -18,6 +18,14 @@
 				"id": "daggerheart",
 				"type": "system"
 			}
+		],
+		"recommends": [
+			{
+				"id": "mist-age-toolkit",
+				"type": "module",
+				"manifest": "https://github.com/liderako/foundry_daggerheart_toolkit/releases/latest/download/module.json",
+				"reason": "Material prices and currency rates for the cost of each attempt; without it every material costs 1 Silver."
+			}
 		]
 	},
 	"esmodules": [
@@ -43,7 +51,7 @@
 			"path": "languages/uk.json"
 		}
 	],
-	"url": "",
-	"manifest": "",
+	"url": "https://github.com/liderako/foundry_daggerheart_learn_spell",
+	"manifest": "https://github.com/liderako/foundry_daggerheart_learn_spell/releases/latest/download/module.json",
 	"download": ""
 }
