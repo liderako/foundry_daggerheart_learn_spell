@@ -68,6 +68,10 @@ Sums are counted in Penny. Exchange rates come from The Mist Age - Toolkit's set
 - Studies: `flags["mist-age-learn-spell"].projects` on the actor — `{ [id]: { name, img, cards, level, book, source, progress, completed, sort, project, description, table } }` (`project: true` with no cards for a GM project; `table` = `{ needed, difficulty, outcomes: { critical: { gain, silver, paper }, … } }` for its own table).
 - The library: world setting `mist-age-learn-spell.library` — `{ books: [{ name, img, spells: [uuid] }], materials: [{ name, img, worth }], paper: [{ name, img }] }`, matched by item name. A material's worth in the inventory comes from `flags["mist-age-prices"].price` (Silver); `worth` is only what the library shows.
 
+## Free actions
+
+With The Mist Age - Free Actions active, every spell study attempt spends one of the character's free actions (none at 0, nothing is blocked), and the roll button shows how many are left.
+
 ## Macro API
 
 ```js

@@ -133,6 +133,7 @@
 			"Needed": "Counter"
 		},
 		"DifficultyLabel": "Difficulty",
-		"CounterHint": "What is left: full at the start, every success lowers it, at 0 it is learnt."
+		"CounterHint": "What is left: full at the start, every success lowers it, at 0 it is learnt.",
+		"SpendReason": "studying «{name}»"
 	}
 }

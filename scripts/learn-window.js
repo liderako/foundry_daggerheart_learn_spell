@@ -4,7 +4,7 @@ import {
 	isBook, isMaterial, loadCards, materialValue, outcomeTable, ownTable, quantityOf, saveProject, setLearnEnabled,
 	unitsValue
 } from "./data.js";
-import { settleStudy, study, studyState } from "./study.js";
+import { freeActionsLine, settleStudy, study, studyState } from "./study.js";
 import { SpellLibrary } from "./library.js";
 
 const { ApplicationV2, HandlebarsApplicationMixin, DialogV2 } = foundry.applications.api;
@@ -87,6 +87,7 @@ export class LearnSpellWindow extends HandlebarsApplicationMixin(ApplicationV2) 
 
 	async _prepareContext(options) {
 		const context = await super._prepareContext(options);
+		context.freeLine = freeActionsLine(this.actor);
 		this.#prune();
 		const isGM = game.user.isGM;
 		const all = getProjects(this.actor);

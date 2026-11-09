@@ -25,6 +25,12 @@
 				"type": "module",
 				"manifest": "https://github.com/liderako/foundry_daggerheart_toolkit/releases/latest/download/module.json",
 				"reason": "Material prices and currency rates for the cost of each attempt; without it every material costs 1 Silver."
+			},
+			{
+				"id": "mist-age-free-actions",
+				"type": "module",
+				"manifest": "https://github.com/liderako/foundry_daggerheart_free_actions/releases/latest/download/module.json",
+				"reason": "Downtime free actions: every spell study attempt spends one."
 			}
 		]
 	},

@@ -186,6 +186,7 @@ export async function study(actor, project, placed = new Map()) {
 	const costs = result.costs?.filter(cost => cost.enabled).map(cost => ({ ...cost, value: -cost.value })) ?? [];
 	result.resourceUpdates?.addResources(costs);
 	await result.resourceUpdates?.updateResources();
+	await freeActions()?.spend(actor, i18n.format("MIST_SPELL.SpendReason", { name: project.name }));
 
 	const outcome = outcomeOf(result.roll);
 	const row = outcomeTable(project)[outcome];
@@ -258,3 +259,14 @@ export async function study(actor, project, placed = new Map()) {
 	return outcome;
 }
 
+/** The Mist Age - Free Actions, when it is active: every downtime roll spends one free action (none at 0). */
+export function freeActions() {
+	const module = game.modules.get("mist-age-free-actions");
+	return module?.active ? module.api ?? null : null;
+}
+
+/** "Free actions: 19" for the roll buttons, or null without the module. */
+export function freeActionsLine(actor) {
+	const api = freeActions();
+	return api ? game.i18n.format("MIST_FREE.Line", { count: api.get(actor) }) : null;
+}

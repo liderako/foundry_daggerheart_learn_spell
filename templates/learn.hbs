@@ -151,6 +151,7 @@
 					<span class="done"><i class="fa-solid fa-circle-check" inert></i> {{localize "MIST_SPELL.Done"}}</span>
 					{{#if ../isGM}}<button type="button" data-action="reopen"><i class="fa-solid fa-rotate-left" inert></i> {{localize "MIST_SPELL.Reopen"}}</button>{{/if}}
 				{{else if ../canRoll}}
+					{{#if ../freeLine}}<span class="mist-free-actions-line"><i class="fa-solid fa-hourglass-half" inert></i> {{../freeLine}}</span>{{/if}}
 					<button type="button" class="primary" data-action="roll" {{#unless project.ready}}disabled{{/unless}}><i class="fa-solid fa-dice-d12" inert></i> {{localize "MIST_SPELL.Roll" trait=../traitLabel difficulty=project.difficulty}}</button>
 				{{/if}}
 			</footer>
